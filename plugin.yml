@@ -1,0 +1,6 @@
+ main: iie.HelloWorldPlugin
+ version: 1.0.0
+ name: HelloWorldPlugin
+ commands:
+   HelloWorld:
+     description: Command that says Hello World!
