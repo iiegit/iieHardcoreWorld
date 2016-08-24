@@ -34,6 +34,9 @@ public class DeathListener implements Listener {
 		if (worldString == "hardcore"){
 				plugin.deathMap.put(playerString, timeString);
 				player.sendMessage(plugin.deathMap.toString());
+				
+				player.sendMessage("Key saved: " + playerString);
+				player.sendMessage("Data saved: " + plugin.deathMap.get(playerString));
 		}
 		
 	}

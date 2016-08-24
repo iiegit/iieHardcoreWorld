@@ -31,9 +31,13 @@ public class HelloWorld implements CommandExecutor {
 			long currentTime = System.currentTimeMillis();
 			String playername = sender.getName();
 			long deathTime = 0;
-						
-			if (plugin.deathMap.get(playername) != null){								
-				deathTime = Long.parseLong(plugin.deathMap.get(playername));				
+			
+			sender.sendMessage("Playername: " + playername);
+			sender.sendMessage("Data Imported: " + plugin.deathMap.get(playername));
+			
+			if (plugin.deathMap.get(playername) != null){	
+				deathTime = Long.parseLong(plugin.deathMap.get(playername));
+				sender.sendMessage("DeathTime: " + deathTime);
 			}else{					
 				sender.sendMessage("you have never died in hardcore");				
 				Player player = (Player) sender;
@@ -46,7 +50,6 @@ public class HelloWorld implements CommandExecutor {
 			//sender.sendMessage(String.valueOf(deathTime));
 			//sender.sendMessage(String.valueOf(currentTime));
 			
-							
 			if (currentTime - deathTime >= 86400000 && deathTime != 0){				
 				sender.sendMessage((86400000 - (currentTime - deathTime) ) /3600000 + " hours have passed since you died in hardcore last");				
 				Player player = (Player) sender;
