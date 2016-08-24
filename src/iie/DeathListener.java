@@ -27,9 +27,13 @@ public class DeathListener implements Listener {
 		Location location = player.getLocation();
 		String worldString = (String) location.getWorld().getName();
 		
+		player.sendMessage(timeString);
+		player.sendMessage(playerString);
+		player.sendMessage(worldString);
 		
 		if (worldString == "hardcore"){
 				plugin.deathMap.put(playerString, timeString);
+				player.sendMessage(plugin.deathMap.toString());
 		}
 		
 	}
