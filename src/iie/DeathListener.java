@@ -35,7 +35,7 @@ public class DeathListener implements Listener {
 				plugin.deathMap.put(playerString, timeString);
 				player.sendMessage(plugin.deathMap.toString());
 				
-				player.sendMessage("Data Saved:, User: "+playerString+" Data: " +plugin.deathMap.get(playerString));
+				player.sendMessage("Data Saved, User: "+playerString+" Data: " +plugin.deathMap.get(playerString));
 		}
 		
 	}
