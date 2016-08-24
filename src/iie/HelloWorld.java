@@ -21,15 +21,17 @@ public class HelloWorld implements CommandExecutor {
 		sender.sendMessage("WELL, AT LEAST THIS WORKS");
 		if (sender instanceof Player){
 			
-			sender.sendMessage("sender IS instanceof Player");
-			
 			long currentTime = System.currentTimeMillis();
 			String playername = sender.getName();
 			long deathTime = 0;
 			
+			sender.sendMessage("Playername: " + playername);
+			sender.sendMessage("DeathMap data:" + plugin.deathMap.get(playername));
+			
 			if (plugin.deathMap.get(playername) != null){
-				
+				sender.sendMessage("You have died in hardcore, getting data");
 				deathTime = Long.parseLong(plugin.deathMap.get(playername));
+				sender.sendMessage("DeathTime: " + deathTime);
 			
 			}else{
 				
