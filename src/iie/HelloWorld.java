@@ -9,10 +9,10 @@ import org.bukkit.entity.Player;
 
 public class HelloWorld implements CommandExecutor {
 	
-	//HelloWorldPlugin plugin;
-	//public HelloWorld(HelloWorldPlugin plugin){
-	//	this.plugin = plugin;
-	//}
+	HelloWorldPlugin plugin;
+	public HelloWorld(HelloWorldPlugin plugin){
+		this.plugin = plugin;
+	}
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command label, String command, String[] args) {

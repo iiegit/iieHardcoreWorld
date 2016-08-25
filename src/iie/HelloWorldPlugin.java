@@ -12,7 +12,7 @@ public class HelloWorldPlugin extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new DeathListener(this), this);
 	}
 	public void registerCommands(){
-		getCommand("HelloWorld").setExecutor(new HelloWorld(/*this*/));
+		getCommand("HelloWorld").setExecutor(new HelloWorld(this));
 	}
 
 }
