@@ -21,8 +21,11 @@ public class publicstaticvoidmain {
 		
 		
 		long currentTime = System.currentTimeMillis();
+		int currentTimeInt = (int) (currentTime/1000);
 
 		System.out.println(currentTime);
+		System.out.println(currentTimeInt);
+
 
 		System.out.println(Long.parseLong("1472003809703"));
 		
