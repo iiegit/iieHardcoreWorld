@@ -26,14 +26,14 @@ public class HelloWorld implements CommandExecutor {
 			long currentTime = System.currentTimeMillis();
 			String playername = sender.getName();
 			long deathTime = 0;
-			sender.sendMessage("Playername: " + playername);
-			sender.sendMessage("Data Imported: " + HelloWorldPlugin.deathMap.get(playername));
+			//sender.sendMessage("Playername: " + playername);
+			//sender.sendMessage("Data Imported: " + HelloWorldPlugin.deathMap.get(playername));
 						
 			if (HelloWorldPlugin.deathMap.get(playername) != null){								
 				deathTime = Long.parseLong(HelloWorldPlugin.deathMap.get(playername));
-				sender.sendMessage("DeathTime: " + deathTime);
+				//sender.sendMessage("DeathTime: " + deathTime);
 			}else{					
-				sender.sendMessage("you have never died in hardcore");				
+				sender.sendMessage("You have never died in hardcore");				
 				Player player = (Player) sender;
 				World hardcoreWorld = player.getServer().getWorld("hardcore");
 				Location location = new Location(hardcoreWorld, 1280, 71, -179);
@@ -43,7 +43,7 @@ public class HelloWorld implements CommandExecutor {
 			
 							
 			if (currentTime - deathTime >= 86400000 && deathTime != 0){				
-				sender.sendMessage((86400000 - (currentTime - deathTime) ) /3600000 + " hours have passed since you died in hardcore last");				
+				sender.sendMessage("You died " + (86400000 - (currentTime - deathTime) ) /3600000 + " hours ago. Ready to give it another shot?");				
 				Player player = (Player) sender;
 				World hardcoreWorld = player.getServer().getWorld("hardcore");
 				Location location = new Location(hardcoreWorld, 1280, 71, -179);

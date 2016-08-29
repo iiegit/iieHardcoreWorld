@@ -17,15 +17,16 @@ public class publicstaticvoidmain {
 			test = 12345;
 		}
 		
+		test = (int) (System.currentTimeMillis()/1000);
 		System.out.println(test);
 		
 		
 		long currentTime = System.currentTimeMillis();
 		int currentTimeInt = (int) (currentTime/1000);
 
-		System.out.println(currentTime);
+		System.out.println(currentTime + " current time");
 		System.out.println(currentTimeInt);
-
+ 
 
 		System.out.println(Long.parseLong("1472003809703"));
 		
