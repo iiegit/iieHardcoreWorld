@@ -15,10 +15,10 @@ import org.bukkit.inventory.ItemStack;
 public class DiamondArmorBlocker implements Listener{
 	public static List<Material> blockedItems = Arrays.asList(Material.DIAMOND_BOOTS, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_LEGGINGS, Material.DIAMOND_HELMET);
 	@EventHandler
-	public void onArmorSmith(CraftItemEvent event){
+	public boolean onArmorSmith(CraftItemEvent event){
 		//SANITATION - hardcore
 		if(event.getWhoClicked().getWorld().getName() != "hardcore"){
-			return;
+			return false;
 		}
 		
 		//INIT - inventory, targetItem
@@ -33,6 +33,7 @@ public class DiamondArmorBlocker implements Listener{
 			event.getWhoClicked().getWorld().playSound(event.getWhoClicked().getLocation(), Sound.AMBIENT_CAVE,0,0);
 			event.getWhoClicked().getWorld().playSound(event.getWhoClicked().getLocation(), Sound.ENTITY_ITEM_BREAK,0,0);
 		}
+		return false;
 		
 		
 	}

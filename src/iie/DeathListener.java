@@ -19,7 +19,7 @@ public class DeathListener implements Listener {
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void onHardcoreDeath(PlayerDeathEvent deathEvent){
+	public boolean onHardcoreDeath(PlayerDeathEvent deathEvent){
 				
 		String timeString = String.valueOf(System.currentTimeMillis());
 		Player player = deathEvent.getEntity();
@@ -40,11 +40,12 @@ public class DeathListener implements Listener {
 				//player.sendMessage("Key saved: " + playerString);
 				//player.sendMessage("Data saved: " + HelloWorldPlugin.deathMap.get(playerString));
 		}
+		return false;
 		
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void onPlayerLogin(PlayerJoinEvent joinEvent){
+	public boolean onPlayerLogin(PlayerJoinEvent joinEvent){
 		
 		
 		
@@ -65,7 +66,7 @@ public class DeathListener implements Listener {
 		if (HelloWorldPlugin.deathMap.get(playerString) == null && score.getScore() != 0){
 			HelloWorldPlugin.deathMap.put(playerString, String.valueOf((score.getScore()) * 1000));
 		}
-		
+		return false;
 	}
 	
 }
