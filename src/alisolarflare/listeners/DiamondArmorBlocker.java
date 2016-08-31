@@ -43,7 +43,8 @@ public class DiamondArmorBlocker implements Listener{
 		
 		//INIT - Chainmail's lore
 		List<String> loreString = new ArrayList<String>();
-		loreString.add("This world is forever dangerous. There is no protection here");
+		loreString.add("This world is forever dangerous.");
+		loreString.add("There is no protection here.");
 		failArmor.getItemMeta().setLore(loreString);
 		return failArmor;
 	}
