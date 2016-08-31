@@ -10,7 +10,6 @@ public class RandomTP{
 	
 	private int conflictX;
 	private int conflictZ;
-	private int conflictCycle;
 	private int conflictRadius = 70;
 	private boolean northUsed;
 	private boolean southUsed;
@@ -63,32 +62,32 @@ public class RandomTP{
 			}
 		}
 		
-		int dir = 0;
+		String dir = "north";
 		//CHOOSES A RANDOM DIRECTION
 		for(int i = 0; i < 1000; i++){
 			double randomDirection = Math.random();
 			if (randomDirection < 0.25){
 				if(northUsed){
 					northUsed = true;
-					dir = 0;
+					dir = "north";
 					break;
 				}
 			}else if(randomDirection < 0.50){
 				if(eastUsed){
 					eastUsed = true;
-					dir = 1;
+					dir = "east";
 					break;
 				}
 			}else if(randomDirection < 0.75){
 				if(southUsed){
 					southUsed = true;
-					dir = 2;
+					dir = "south";
 					break;
 				}
 			}else{
 				if(westUsed){
 					westUsed = true;
-					dir = 3;
+					dir = "west";
 					break;
 				}
 				
@@ -96,12 +95,28 @@ public class RandomTP{
 		}
 		
 		
-		
-		
-		
-		//INCREMENT - shift cycle
-		conflictCycle++;
-		//conflict cycle - 0:N, 1:E, 2:S, 3:W
+		//TELEPORT - teleports player to the conflict point
+		switch(dir){
+			case "north":
+				northUsed = false;
+				player.teleport(world.getHighestBlockAt(conflictX, conflictZ - conflictRadius).getLocation());
+				break;
+			case "east":
+				eastUsed = false;
+				player.teleport(world.getHighestBlockAt(conflictX + conflictRadius, conflictZ).getLocation());
+				break;
+			case "south":
+				southUsed = false;
+				player.teleport(world.getHighestBlockAt(conflictX, conflictZ + conflictRadius).getLocation());
+				break;
+			case "west":
+				westUsed = false;
+				player.teleport(world.getHighestBlockAt(conflictX - conflictRadius, conflictZ).getLocation());
+				break;
+			default:
+				player.teleport(world.getHighestBlockAt(conflictX, conflictZ).getLocation());
+				break;
+		}
 	}
 
 	//Randomly teleports a player, into the hardcore world
