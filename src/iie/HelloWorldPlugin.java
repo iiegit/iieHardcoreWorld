@@ -18,8 +18,18 @@ public class HelloWorldPlugin extends JavaPlugin {
 	public void onEnable(){
 		registerCommands();
 		getServer().getPluginManager().registerEvents(new DeathListener(this), this);
-		board = Bukkit.getServer().getScoreboardManager().getMainScoreboard();
-		hardcoreTimeDead = board.registerNewObjective("hardcoreTimeDead", "dummy");
+		
+		
+		board = Bukkit.getServer().getScoreboardManager().getMainScoreboard();		
+		try{
+			board.getObjective("hardcoreTimeDead");
+		}catch (IllegalArgumentException e){
+			hardcoreTimeDead = board.registerNewObjective("hardcoreTimeDead", "dummy");
+		}finally{
+			hardcoreTimeDead = board.getObjective("hardcoreTimeDead");
+		}
+		
+		
 	}
 	public void registerCommands(){
 		getCommand("HelloWorld").setExecutor(new HelloWorld(this));

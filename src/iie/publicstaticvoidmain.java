@@ -8,18 +8,8 @@ public class publicstaticvoidmain {
 	public static void main(String[] args){
 		System.out.println("Hello World!");
 		
-		int test = 1234;
-		String testString = Integer.toString(test);
-		int test2 = Integer.parseInt(testString);
-		System.out.println(test2);
-		
-		if (test == 1234){
-			test = 12345;
-		}
-		
-		test = (int) (System.currentTimeMillis()/1000);
-		System.out.println(test);
-		
+		int test = (int) (System.currentTimeMillis()/1000);
+		System.out.println(test);				
 		
 		long currentTime = System.currentTimeMillis();
 		int currentTimeInt = (int) (currentTime/1000);
@@ -37,7 +27,9 @@ public class publicstaticvoidmain {
 		System.out.println(deathTime + " is a number");		
 		
 		System.out.println(deathMap.get("other"));
-		System.out.println("you are dead for the next " + ((86400000 - (currentTime - deathTime))/3600000) + " hours");
+		System.out.println("you are dead for the next " + ((86400000 - (currentTime - deathTime))/3600000) + " hours"); 
+		
+		
 		
 
 		
