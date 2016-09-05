@@ -18,37 +18,21 @@ public class HelloWorldPlugin extends JavaPlugin {
 	public void onEnable(){
 		
 		
-		try{
-			board.getObjective("hardcoreTimeDead");
-			}catch (NullPointerException e){
-				hardcoreTimeDead = board.registerNewObjective("hardcoreTimeDead", "dummy");
-			}finally{
-				hardcoreTimeDead = board.getObjective("hardcoreTimeDead");
-			}
-		
-		
 		board = Bukkit.getServer().getScoreboardManager().getMainScoreboard();			
 		if (board.getObjective("hardcoreTimeDead") != null){
 			hardcoreTimeDead = board.getObjective("hardcoreTimeDead");
 		}else{
 			hardcoreTimeDead = board.registerNewObjective("hardcoreTimeDead", "dummy");
-
 		}		
 		
 		registerCommands();
+		getServer().getPluginManager().registerEvents(new JoinListener(this), this);
 		getServer().getPluginManager().registerEvents(new DeathListener(this), this);
+
 		
 	}
 	public void registerCommands(){
-		getCommand("HelloWorld").setExecutor(new HelloWorld(this));
+		getCommand("hardcore").setExecutor(new HelloWorld(this));
 	}
 
 }
-
-//try{
-//	board.getObjective("hardcoreTimeDead");
-//}catch (IllegalArgumentException e){
-//	hardcoreTimeDead = board.registerNewObjective("hardcoreTimeDead", "dummy");
-//}finally{
-//	hardcoreTimeDead = board.getObjective("hardcoreTimeDead");
-//}

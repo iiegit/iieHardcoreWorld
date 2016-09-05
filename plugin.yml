@@ -2,5 +2,5 @@
  version: 1.0.0
  name: HelloWorldPlugin
  commands:
-   HelloWorld:
-     description: Command that says Hello World!
+   hardcore:
+     description: Command that teleports you to hardcore world

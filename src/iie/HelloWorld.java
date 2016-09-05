@@ -1,6 +1,7 @@
 package iie;
 
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,52 +21,43 @@ public class HelloWorld implements CommandExecutor {
 		
 		
 		
-				
+		
 		if (sender instanceof Player){
-
-			long currentTime = System.currentTimeMillis();
+			
+			Player player = (Player) sender;
 			String playername = sender.getName();
-			long deathTime = 0;
-			//sender.sendMessage("Playername: " + playername);
-			//sender.sendMessage("Data Imported: " + HelloWorldPlugin.deathMap.get(playername));
+			
+			World hardcoreWorld = player.getServer().getWorld("hardcore");
+			Location location = new Location(hardcoreWorld, 1280, 71, -179);
+
+			int currentTime = (int) ((System.currentTimeMillis())/1000);
+			int deathTime = 0;
 						
-			if (HelloWorldPlugin.deathMap.get(playername) != null){								
-				deathTime = Long.parseLong(HelloWorldPlugin.deathMap.get(playername));
-				//sender.sendMessage("DeathTime: " + deathTime);
-			}else{					
-				sender.sendMessage("You have never died in hardcore");				
-				Player player = (Player) sender;
-				World hardcoreWorld = player.getServer().getWorld("hardcore");
-				Location location = new Location(hardcoreWorld, 1280, 71, -179);
-				player.teleport(location);		
-			}
+			if (HelloWorldPlugin.hardcoreTimeDead.getScore(playername) != null)					//null check - if score exists
+				deathTime = HelloWorldPlugin.hardcoreTimeDead.getScore(playername).getScore();  //set deathTime to that score
+			
 			
 			
 							
-			if (currentTime - deathTime >= 86400000 && deathTime != 0){				
-				sender.sendMessage("You died " + (86400000 - (currentTime - deathTime) ) /3600000 + " hours ago. Ready to give it another shot?");				
-				Player player = (Player) sender;
-				World hardcoreWorld = player.getServer().getWorld("hardcore");
-				Location location = new Location(hardcoreWorld, 1280, 71, -179);
+			if (currentTime - deathTime >= 86400 && deathTime != 0){				
+				sender.sendMessage("You died " + (86400 - (currentTime - deathTime)) /3600 + " hours ago. Ready to give it another shot?");				
 				player.teleport(location);
+				// player.getWorld().playSound(player.getLocation(), Sound.AMBIENT_CAVE,0,0); I don't think this works, fix later
 			}else if(deathTime == 0){		
-				sender.sendMessage("good luck");
+				sender.sendMessage("You have never died in hardcore. Good luck!");				
+				player.teleport(location);
+				// player.getWorld().playSound(player.getLocation(), Sound.AMBIENT_CAVE,0,0); I don't think this works, fix later
 			}else{
-				sender.sendMessage("you are dead for the next " + (86400000 - (currentTime - deathTime) ) /3600000 + " hours");			
+				sender.sendMessage("you are dead for the next " + (86400 - (currentTime - deathTime) ) /3600 + " hours");
+				// player.getWorld().playSound(player.getLocation(), Sound.AMBIENT_CAVE,0,0); I don't think this works, fix later
+				// replace sound with some other sound
 			}
 			
 			
-			
-			sender.sendMessage("Your hardcoreTimeDead score is " + String.valueOf(HelloWorldPlugin.hardcoreTimeDead.getScore(playername).getScore()));
-			
-					
 			
 		}else{			
 			sender.sendMessage("You must be a player to use this command!");			
 		}
-		
-		
-		
 		
 		
 		
