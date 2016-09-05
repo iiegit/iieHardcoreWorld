@@ -3,10 +3,15 @@ package alisolarflare;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import iie.HelloWorldPlugin;
 
-public class RandomTP{
+
+public class RandomTP implements CommandExecutor{
 	
 	private int conflictX;
 	private int conflictZ;
@@ -15,6 +20,12 @@ public class RandomTP{
 	private boolean southUsed;
 	private boolean eastUsed;
 	private boolean westUsed;
+	@SuppressWarnings("unused")
+	private HelloWorldPlugin helloWorldPlugin;
+	public RandomTP(HelloWorldPlugin helloWorldPlugin) {
+		this.helloWorldPlugin = helloWorldPlugin;
+	}
+
 	//every 4 players who use it will be teleported near each other.
 	//ex. iie > 1200, ali -> 1210, byz -> 1190, charles -> 1195, wind -> 300, zan -> 310, etc
 	public void conflictRtp(Player player, World world, Location minLocation, Location maxLocation){
@@ -121,31 +132,53 @@ public class RandomTP{
 
 	//Randomly teleports a player, into the hardcore world
 	public void rtp(Player player, World world, Location minLocation, Location maxLocation){
-
+		player.sendMessage("TELEPORT INITIATED");
+		player.sendMessage("minLocation: " + minLocation.toString());
+		player.sendMessage("maxLocation: " + maxLocation.toString());
+		player.sendMessage("world      : " + world.toString());
+		player.sendMessage("player     : " + player.toString());
 
 		//INIT - xDifference, xAverage
 		int xdifference = minLocation.getBlockX() - maxLocation.getBlockX();
 		int xAverage = (int) Math.floor(minLocation.getBlockX() + maxLocation.getBlockX() / 2);
-
+		
 		//INIT - zDifference, zAverage
 		int zdifference = minLocation.getBlockX() - maxLocation.getBlockY();
 		int zAverage = (int) Math.floor(minLocation.getBlockZ() + maxLocation.getBlockZ());
-
+		player.sendMessage("Averages   : " + xAverage + "|" + zAverage);
 		//TELEPORTS - Tries 20 times to find a location
 		for(int i = 0; i < 20; i ++){
-
+			
 			//INIT - attemptedX, attemptedZ
 			int attemptedX = (int) Math.floor((Math.random()-0.5)*xdifference) + xAverage;
 			int attemptedZ = (int) Math.floor((Math.random()-0.5)*zdifference) + zAverage;
-
+			player.sendMessage("TAKE " + i + " : " + attemptedX + ", "+ attemptedZ);
 			//CHECKS - if ground is safe
 			boolean groundisSafe = world.getHighestBlockAt(attemptedX, attemptedZ).getType() != Material.WATER;
 			if (groundisSafe){
+				player.sendMessage("SAFE GROUND, TELEPORTING");
 				player.teleport(world.getHighestBlockAt(attemptedX, attemptedZ).getLocation());
 				return;
 			}
 
 			//player.teleport(arg0)
 		}
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if(!(sender instanceof Player)){
+			sender.sendMessage("You must be a Player to use this command!");
+			sender.sendMessage(sender.toString());
+			return false;
+		}
+		Player player = (Player) sender;
+		if(player.getWorld().getName() != "hardcore"){
+			sender.sendMessage("You must be in the hardcore world to use this command!");
+			sender.sendMessage("Current World: " + player.getWorld().getName());
+			return false;
+		}
+		rtp(player, player.getWorld(), new Location(player.getWorld(), 644, 65, -944), new Location(player.getWorld(), 1700, 65, 464));
+		return false;
 	}
 }

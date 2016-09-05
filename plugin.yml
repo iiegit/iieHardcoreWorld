@@ -4,3 +4,5 @@
  commands:
    HelloWorld:
      description: Command that says Hello World!
+   debugRTP:
+     description: Command that randomly teleports someone inside the hardcore world
