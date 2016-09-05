@@ -14,21 +14,27 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class ConflictCompassCraftingListener implements Listener{
+	public static void main(String[] args){
+		String nulltest = null;
+		if(nulltest == null){
+			System.out.println("NUUUUULL");
+		}
+	}
 
 	@EventHandler
 	public boolean onConflictCompassCraft(CraftItemEvent event){
 		//SANITATION - HARDCORE
-		if(event.getWhoClicked().getWorld().getName() != "hardcore"){
+		if(event.getWhoClicked().getWorld().getName() != "hardcore")
 			return false;
-		}
+		
 		
 		//INIT - targetItem
 		ItemStack targetItem = event.getRecipe().getResult();
 		
 		//SANITATION - NOT COMPASS
-		if(targetItem.getType() != Material.COMPASS){
+		if(targetItem.getType() != Material.COMPASS)
 			return false;
-		}
+		
 		
 		event.setCancelled(true);			
 		//GIVE - chainmail chestplate
@@ -60,9 +66,9 @@ public class ConflictCompassCraftingListener implements Listener{
 				nearestPlayer = player;
 			}
 		}
-		if(nearestPlayer == null){
+		if(nearestPlayer == null)
 			return "METAL";
-		}
+		
 		return nearestPlayer.toString();
 	}
 }
