@@ -24,7 +24,23 @@ public class RandomTP implements CommandExecutor{
 	public RandomTP(HelloWorldPlugin helloWorldPlugin) {
 		this.helloWorldPlugin = helloWorldPlugin;
 	}
-
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		sender.sendMessage("FIRING");
+		if(!(sender instanceof Player)){
+			sender.sendMessage("You must be a Player to use this command!");
+			sender.sendMessage(sender.toString());
+			return false;
+		}
+		Player player = (Player) sender;
+		if(player.getWorld().getName() != "hardcore"){
+			sender.sendMessage("You must be in the hardcore world to use this command!");
+			sender.sendMessage("Current World: " + player.getWorld().getName());
+			return false;
+		}
+		rtp(player, player.getWorld(), new Location(player.getWorld(), 644, 65, -944), new Location(player.getWorld(), 1700, 65, 464));
+		return false;
+	}
 	//every 4 players who use it will be teleported near each other.
 	//ex. iie > 1200, ali -> 1210, byz -> 1190, charles -> 1195, wind -> 300, zan -> 310, etc
 	public void conflictRtp(Player player, World world, Location minLocation, Location maxLocation){
@@ -164,20 +180,5 @@ public class RandomTP implements CommandExecutor{
 		}
 	}
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(!(sender instanceof Player)){
-			sender.sendMessage("You must be a Player to use this command!");
-			sender.sendMessage(sender.toString());
-			return false;
-		}
-		Player player = (Player) sender;
-		if(player.getWorld().getName() != "hardcore"){
-			sender.sendMessage("You must be in the hardcore world to use this command!");
-			sender.sendMessage("Current World: " + player.getWorld().getName());
-			return false;
-		}
-		rtp(player, player.getWorld(), new Location(player.getWorld(), 644, 65, -944), new Location(player.getWorld(), 1700, 65, 464));
-		return false;
-	}
+	
 }
